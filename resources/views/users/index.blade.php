@@ -1,8 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
+    <div>
+    <div class="flex justify-between">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('User List') }}
         </h2>
+        </div>
+        <div class="text-right"><a href="{{route('users.create')}}" class="text-white bg-blue-700 p-3 rounded-lg ">Add New</a></div>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -24,8 +29,10 @@
                         <tr>
                     <th>{{ $user->name}}</th>
                     <th>{{ $user->email}}</th>
-                    <th>{{ $user->getRoleNames()}}</th>
-                    <th></th>
+                    <th>{{ implode($user->getRoleNames()->toArray()) }}</th>
+                    <th><a href="{{route('users.edit', [$user->id])}}" class="text-white bg-yellow-700 p-2 rounded-sm ">Edit</a>
+                        
+                </th>
                         </tr>
                         @endforeach
                  

@@ -65,7 +65,7 @@ class UserManagementController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
     }
 
     /**
@@ -73,7 +73,8 @@ class UserManagementController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user =User::find($id);
+        return view ('users.edit',compact('user'));
     }
 
     /**
@@ -81,7 +82,20 @@ class UserManagementController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'role'=>'required',
+         ]);
+ 
+         $user =User::find($id);
+         $user->name= $request->name;
+         $user->email= $request->email;
+         
+         $user->save();
+ 
+         $user->syncRole([$request->role]);
+ 
+         return redirect(route('users.index'));
     }
 
     /**

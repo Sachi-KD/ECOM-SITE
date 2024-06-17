@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserManagementController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserManagementController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,11 +17,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    //instead of  all routes this route should here bcz anyone cnt access by url
+    Route::resource('users',UserManagementController::class);
+    Route::resource('categories', CategoryController::class);
 });
 
 
-//instead of  all routes
-Route::resource('users',UserManagementController::class); 
+ 
 
 // Route::get('/users', [UserManagementController::class, 'index'])->name('users.index');
 // Route::post('/users', [UserManagementController::class, 'store'])->name('users.store');
