@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserManagementController;
@@ -20,6 +22,7 @@ Route::middleware('auth')->group(function () {
     //instead of  all routes this route should here bcz anyone cnt access by url
     Route::resource('users',UserManagementController::class);
     Route::resource('categories', CategoryController::class);
+    Route::resource('products', ProductController::class);
 });
 
 

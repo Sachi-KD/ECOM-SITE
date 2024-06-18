@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class Category
@@ -46,6 +47,11 @@ class Category extends Model
     public function categories()
     {
         return $this->hasMany(\App\Models\Category::class, 'id', 'parent_id');
+    }
+
+    public function products():HasMany
+    {
+        return $this->hasMany(Product::class);
     }
     
 }
